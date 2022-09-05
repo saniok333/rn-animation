@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { StyleSheet, Animated } from 'react-native';
+import { StyleSheet, Animated, Easing } from 'react-native';
 
 export default function App() {
   const translation = useRef(new Animated.Value(0)).current;
@@ -7,6 +7,9 @@ export default function App() {
   useEffect(() => {
     Animated.timing(translation, {
       toValue: 250,
+      delay: 2000,
+      duration: 3000,
+      easing: Easing.bounce,
       useNativeDriver: true,
     }).start();
   }, []);
