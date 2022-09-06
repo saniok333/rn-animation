@@ -8,7 +8,7 @@ export default function App() {
     Animated.timing(translation, {
       toValue: 100,
       duration: 1000,
-      useNativeDriver: true,
+      useNativeDriver: false,
     }).start();
   }, []);
 
@@ -31,6 +31,10 @@ export default function App() {
                 }),
               },
             ],
+            backgroundColor: translation.interpolate({
+              inputRange: [0, 100],
+              outputRange: ['orange', 'blue'],
+            }),
           },
         ]}
       ></Animated.View>
@@ -43,6 +47,6 @@ const styles = StyleSheet.create({
     margin: 100,
     width: 100,
     height: 100,
-    backgroundColor: 'orange',
+    //backgroundColor: 'orange',
   },
 });
