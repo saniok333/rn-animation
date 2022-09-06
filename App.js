@@ -2,25 +2,14 @@ import { useRef, useEffect } from 'react';
 import { StyleSheet, Animated, Easing } from 'react-native';
 
 export default function App() {
-  const firstOpacity = useRef(new Animated.Value(0)).current;
-  const secondOpacity = useRef(new Animated.Value(0)).current;
-  const thirdOpacity = useRef(new Animated.Value(0)).current;
+  const translation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Animated.stagger(1000, [
-      Animated.timing(firstOpacity, {
-        toValue: 1,
-        useNativeDriver: true,
-      }),
-      Animated.timing(secondOpacity, {
-        toValue: 1,
-        useNativeDriver: true,
-      }),
-      Animated.timing(thirdOpacity, {
-        toValue: 1,
-        useNativeDriver: true,
-      }),
-    ]).start();
+    Animated.timing(translation, {
+      toValue: 100,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
   }, []);
 
   return (
@@ -29,23 +18,11 @@ export default function App() {
         style={[
           styles.container,
           {
-            opacity: firstOpacity,
-          },
-        ]}
-      ></Animated.View>
-      <Animated.View
-        style={[
-          styles.container,
-          {
-            opacity: secondOpacity,
-          },
-        ]}
-      ></Animated.View>
-      <Animated.View
-        style={[
-          styles.container,
-          {
-            opacity: thirdOpacity,
+            opacity: translation.interpolate({
+              inputRange: [0, 100],
+              outputRange: [0, 1],
+            }),
+            transform: [{ translateX: translation }],
           },
         ]}
       ></Animated.View>
